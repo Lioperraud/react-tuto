@@ -1,7 +1,5 @@
-function Profile() {
-  const name = "Lionel";
-  const age = 42;
-
+function Profile({name,age}) {
+ 
   return (
     <div>
       <h2>Profil</h2>
