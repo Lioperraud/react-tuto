@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <h1>{message}</h1>
-      <div class="profils">
+      <div className="profils">
         <Profile name="Lionel" age="42"/>
         <Profile name="Serge" age="53"/>
         <Profile name="Monique" age="17"/>
