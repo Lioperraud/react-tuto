@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from "react";
+import TaskList from "./components/TaskList";
 import './App.css'
-import Profile from './Profile';
 
 function App() {
-  const message = "Hello, React ! 🚀";
-  const compteurInit=0;
-  const [count, setCount] = useState(compteurInit);
-  const reset = () => setCount(compteurInit);
-  const [name, setName] = useState("");
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const [newTask, setNewTask] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const addTask = () => {
+    if (newTask.trim() === "") return;
+
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        text: newTask,
+        done: false
+      }
+    ]);
+    setNewTask("");
+  };
+
+  const toggleTask = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id
+          ? { ...task, done: !task.done }
+          : task
+      )
+    );
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <div>
-      <h1>{message}</h1>
-      <h2>Utilisateurs</h2>
-      <div className="profils">
-        <Profile name="Lionel" age={42}/>
-        <Profile name="Serge" age={28}/>
+      <h1>Todo List</h1>
+
+      <div className="add_task">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="Nouvelle tâche"
+        />
+        <button onClick={addTask}>Ajouter</button>
       </div>
-      <h2>Compteur</h2>
-      <p>Valeur : {count}</p>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <button onClick={() => setCount(prev => (prev > 0 ? prev - 1 : prev))}>-</button>
-      <button onClick={reset} >Reset</button>
-      {count > 10 && <p>🎉 Attention, compteur supérieur à 10 !</p>}
-      <h2>Formulaire</h2>
-      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ton prénom" />
-      <h3>Bonjour 🌟{name}🌟</h3>
+      <TaskList
+        tasks={tasks}
+        onToggleTask={toggleTask}
+        onDeleteTask={deleteTask}
+      />
     </div>
   );
 }
 
 export default App;
+
