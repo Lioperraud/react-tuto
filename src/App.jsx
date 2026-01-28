@@ -1,22 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from "react";
+import TaskList from "./components/TaskList";
 import './App.css'
-import Profile from './Profile';
 
 function App() {
-  const message = "Hello, React ! 🚀";
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const [newTask, setNewTask] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const addTask = () => {
+    if (newTask.trim() === "") return;
+
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        text: newTask,
+        done: false
+      }
+    ]);
+    setNewTask("");
+  };
+
+  const toggleTask = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id
+          ? { ...task, done: !task.done }
+          : task
+      )
+    );
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <div>
-      <h1>{message}</h1>
-      <div className="profils">
-        <Profile name="Lionel" age="42"/>
-        <Profile name="Serge" age="53"/>
-        <Profile name="Monique" age="17"/>
+      <h1>Todo List</h1>
+
+      <div className="add_task">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="Nouvelle tâche"
+        />
+        <button onClick={addTask}>Ajouter</button>
       </div>
+      <TaskList
+        tasks={tasks}
+        onToggleTask={toggleTask}
+        onDeleteTask={deleteTask}
+      />
     </div>
   );
 }
 
 export default App;
+
