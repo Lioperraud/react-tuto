@@ -44,22 +44,27 @@ function App() {
 
   return (
     <div>
-      <h1>Todo List</h1>
-
-      <div className="add_task">
-        <input
-          type="text"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          placeholder="Nouvelle tâche"
-        />
-        <button onClick={addTask}>Ajouter</button>
+      <div className="card">
+        <header>
+          <h1>Todo List</h1>
+        </header>
+        <section>
+          <div className="add_task">
+            <input
+              type="text"
+              value={newTask}
+              onChange={(e) => setNewTask(e.target.value)}
+              placeholder="Nouvelle tâche"
+            />
+            <button onClick={addTask}>Ajouter</button>
+          </div>
+          <TaskList
+            tasks={tasks}
+            onToggleTask={toggleTask}
+            onDeleteTask={deleteTask}
+          />
+        </section>
       </div>
-      <TaskList
-        tasks={tasks}
-        onToggleTask={toggleTask}
-        onDeleteTask={deleteTask}
-      />
     </div>
   );
 }
