@@ -1,13 +1,22 @@
-function Profile({name,age,affiche}) {
+import { useState } from "react";
+
+function Profile({name,age}) {
  
-  if(!affiche)
-    return null;
-  
+  const [affiche, setAffiche] = useState(true);
+
   return (
     <div>
-      <h2>Profil</h2>
-      <p>Nom : {name}</p>
-      <p>Age : {age} ans</p>
+      <button onClick={() => setAffiche(!affiche)}>
+        {affiche ? "Masquer" : "Afficher"} le profil
+      </button>
+
+      {affiche && (
+        <div>
+          <h2>Profil</h2>
+          <p>Nom : {name}</p>
+          <p>Age : {age} ans</p>
+        </div>
+      )}
     </div>
   );
 }
