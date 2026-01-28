@@ -24,7 +24,7 @@ function App() {
       <button onClick={() => setCount(count + 1)}>+</button>
       <button onClick={() => setCount(prev => (prev > 0 ? prev - 1 : prev))}>-</button>
       <button onClick={reset} >Reset</button>
-      {count > 10 && <p>🎉 Attention, compteur > 10 !</p>}
+      {count > 10 && <p>🎉 Attention, compteur supérieur à 10 !</p>}
       <h2>Formulaire</h2>
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ton prénom" />
       <h3>Bonjour 🌟{name}🌟</h3>
