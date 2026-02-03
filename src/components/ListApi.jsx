@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ListApi() {
 
@@ -42,7 +43,7 @@ function ListApi() {
                 <ul>
                     {filteredUsers.map((user) => (
                     <li key={user.id}>
-                        {user.name} — {user.email} — {user.address.city}
+                        {user.name} — {user.email} — {user.address.city} - <Link to={`/users/${user.id}`}> Voir</Link>
                     </li>
                     ))}
                 </ul>

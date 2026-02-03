@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import TaskList from "./TaskList";
+import TaskList from "../components/TaskList";
 
 function TodoList() {
   const [tasks, setTasks] = useState(() => {
