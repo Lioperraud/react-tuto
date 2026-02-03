@@ -9,6 +9,25 @@
   flex-flow:row wrap;
   gap:16px;
 }
+.menu{
+  position: fixed;
+  top:0;
+  left:0 ;
+  right:0;
+  height:40px;
+  padding:16px 0;
+  background-color: #fff;
+  display:flex;
+  justify-content: center;
+  gap:16px;
+}
+.menu a{
+  color:#999;
+  font-size:1.2em;
+}
+.menu a.active{
+  color:#000;
+}
 .card{
   border:1px solid #fff;
   border-radius:4px;

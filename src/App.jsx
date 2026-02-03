@@ -2,15 +2,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Users from "./pages/Users";
 import UserDetail from "./pages/UserDetail";
-import './App.css'
 import TodoList from "./pages/TodoList";
 import Chrono from "./pages/Chrono";
+import NavBar from "./components/NavBar";
+import './App.css'
 
 
 function App() {
 
   return (
     <BrowserRouter>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<Users />} />
@@ -19,13 +21,6 @@ function App() {
         <Route path="/todolist" element={<TodoList />} />
       </Routes>
     </BrowserRouter>
-    /*
-    <div className="app">
-       <TodoList />
-       <Chrono />
-       <ListApi />
-    </div>
-    */
   );
 }
 
