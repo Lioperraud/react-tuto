@@ -7,6 +7,7 @@ function NavBar() {
       <NavLink to="/users">Utilisateurs</NavLink>
       <NavLink to="/chrono">Chrono</NavLink>
       <NavLink to="/todolist">Todo List</NavLink>
+      <NavLink to="/form">Formulaire</NavLink>
     </nav>
   );
 }

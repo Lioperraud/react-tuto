@@ -4,6 +4,7 @@ import Users from "./pages/Users";
 import UserDetail from "./pages/UserDetail";
 import TodoList from "./pages/TodoList";
 import Chrono from "./pages/Chrono";
+import Form from "./pages/Form";
 import NavBar from "./components/NavBar";
 import './App.css'
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/users/:id" element={<UserDetail />} />
         <Route path="/chrono" element={<Chrono />} />
         <Route path="/todolist" element={<TodoList />} />
+        <Route path="/form" element={<Form />} />
       </Routes>
     </BrowserRouter>
   );

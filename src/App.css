@@ -128,3 +128,33 @@
   align-items: flex-start;
   gap:8px;
 }
+.contact{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  align-items:center;
+}
+.contact input[type="text"]{
+  padding:8px;
+  width:300px;
+}
+.contact select{
+  padding:8px;
+  width:320px;
+}
+.contact label{
+  display: flex;
+  align-items: center;
+  gap:8px;
+}
+.contact input[type="checkbox"]{
+  width:20px;
+  height:20px;
+}
+.contact_recap{
+  margin-top:20px;
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+
+}
