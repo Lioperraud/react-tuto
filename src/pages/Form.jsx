@@ -1,4 +1,7 @@
 import { useState } from "react";
+import InputField from "../components/InputField";
+import CheckboxField from "../components/CheckboxField";
+import SelectField from "../components/SelectField";
 
 function Form(){
 
@@ -7,8 +10,9 @@ function Form(){
         email: "",
         password: "",
         password2: "",
-        isChecked: false,
-        country: "fr"
+        cgu: false,
+        rgpd: false,
+        country: ""
     });
     const [isValid, setIdValid] = useState();
     const [errors, setErrors] = useState({});
@@ -29,10 +33,22 @@ function Form(){
         else if(form.password!=form.password2)
             newErrors.password2='Confirmation mdp incorrect';
     
-        if(!form.isChecked)
-            newErrors.isChecked='Check est obligatoire';
+        if(!form.cgu)
+            newErrors.cgu='Vous devez accepter les CGU';
+        if(!form.rgpd)
+            newErrors.rgpd='Vous devez accepter le RGPD';
+
+        if(!form.country)
+            newErrors.country='Le pays est obligatoire';
         
         return newErrors;
+    };
+
+    const handleChange = (e) => {
+        if(e.target.type=='checkbox')
+            setForm({ ...form, [e.target.name]: e.target.checked })
+        else
+            setForm({ ...form,[e.target.name]: e.target.value});
     };
 
     const handleSubmit = (e) => {
@@ -48,60 +64,62 @@ function Form(){
             <h1>Formulaire de contact</h1>
             <form className="contact" onSubmit={handleSubmit}>
                 {isValid===false && <p className="err">Formulaire invalide !</p>}
-                <div>
-                    <input
-                        name="name"
-                        type="text"
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
-                        placeholder="Nom"
-                    />
-                    {errors.name && <p className="err">{errors.name}</p>}
-                </div>
-                <div>
-                    <input
-                        name="email"
-                        type="text"
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
-                        placeholder="Email"
-                    />
-                    {errors.email && <p className="err">{errors.email}</p>}
-                </div>
-                <div>
-                    <input
-                        name="password"
-                        type="password"
-                        value={form.password}
-                        onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
-                        placeholder="Mot de passe"
-                    />
-                    {errors.password && <p className="err">{errors.password}</p>}
-                </div>
-                <div>
-                    <input
-                        name="password2"
-                        type="password"
-                        value={form.password2}
-                        onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
-                        placeholder="Confirmation mot de passe"
-                    />
-                    {errors.password2 && <p className="err">{errors.password2}</p>}
-                </div>
-                <div>
-                    <label>Check : <input
-                        type="checkbox"
-                        name="isChecked"
-                        checked={form.isChecked}
-                        onChange={(e) => setForm({ ...form, [e.target.name]: e.target.checked })}
-                    /></label>
-                    {errors.isChecked && <p className="err">{errors.isChecked}</p>}
-                </div>
-                <select name="country" value={form.country} onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}>
-                    <option value="fr">France</option>
-                    <option value="be">Belgique</option>
-                    <option value="ch">Suisse</option>
-                </select>
+                <InputField
+                    label="Nom"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    error={errors.name}
+                />
+                <InputField
+                    label="Email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    error={errors.email}
+                />
+                <InputField
+                    label="Mot de passe"
+                    name="password"
+                    type="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    error={errors.password}
+                />
+                <InputField
+                    label="Confirmation mot de passe"
+                    name="password2"
+                    type="password"
+                    value={form.password2}
+                    onChange={handleChange}
+                    error={errors.password2}
+                />
+                <CheckboxField
+                    label="Acceptation CGU"
+                    name="cgu"
+                    value={form.cgu}
+                    onChange={handleChange}
+                    error={errors.cgu}
+                />
+                <CheckboxField
+                    label="Acceptation RGPD"
+                    name="rgpd"
+                    value={form.rgpd}
+                    onChange={handleChange}
+                    error={errors.rgpd}
+                />
+                <SelectField
+                    label="Pays"
+                    name="country"
+                    value={form.country}
+                    onChange={handleChange}
+                    error={errors.country}
+                    options={ [
+                    { value: "fr", label: "France" },
+                    { value: "ch", label: "Suisse" },
+                    { value: "be", label: "Belgique" }
+                    ]}
+                />
                 <button type="submit">Envoyer</button>
             </form>
             {isValid && 
@@ -110,7 +128,8 @@ function Form(){
                     <h2>Formulaire valide !</h2>
                     <span>Nom : {form.name}</span>
                     <span>Email : {form.email}</span>
-                    <span>IsChecked : {String(form.isChecked)}</span>
+                    <span>Acceptation CGU : {String(form.cgu)}</span>
+                    <span>Acceptation RGPD : {String(form.rgpd)}</span>
                     <span>Pays : {form.country}</span>
                 </div>
             </>
