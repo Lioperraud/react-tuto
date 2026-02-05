@@ -45,10 +45,12 @@ function Form(){
     };
 
     const handleChange = (e) => {
-        if(e.target.type=='checkbox')
-            setForm({ ...form, [e.target.name]: e.target.checked })
-        else
-            setForm({ ...form,[e.target.name]: e.target.value});
+        const { name, value, type, checked } = e.target;
+
+        setForm({
+        ...form,
+        [name]: type === "checkbox" ? checked : value
+        });
     };
 
     const handleSubmit = (e) => {
