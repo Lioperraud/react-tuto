@@ -64,7 +64,7 @@ function Form(){
     return(
         <div>
             <h1>Formulaire de contact</h1>
-            <form className="contact" onSubmit={handleSubmit}>
+            <form className="formGenerique" onSubmit={handleSubmit}>
                 {isValid===false && <p className="err">Formulaire invalide !</p>}
                 <InputField
                     label="Nom"

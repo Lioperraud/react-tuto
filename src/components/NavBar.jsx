@@ -14,7 +14,7 @@ function NavBar() {
       <NavLink to="/dashboard">Dashboard</NavLink>
       {user && 
         <div className="logout">
-          <span>Bienvenue {user.name} : <span onClick={logout} className="lien">Logout</span></span>
+          <span>Bienvenue {user.firstName} : <span onClick={logout} className="lien">Logout</span></span>
         </div>
       }
     </nav>

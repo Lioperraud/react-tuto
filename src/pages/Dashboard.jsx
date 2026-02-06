@@ -6,7 +6,7 @@ function Dashboard(){
     
     return (
         <div>
-            <h1>Bienvenue {user.name} dans ton dashboard !</h1>
+            <h1>Bienvenue {user.firstName} dans ton dashboard !</h1>
         </div>
     );
 }
