@@ -6,8 +6,7 @@ function Dashboard(){
     
     return (
         <div>
-            <h1>Bienvenue {user.name}</h1>
-            <button onClick={logout}>Logout</button>
+            <h1>Bienvenue {user.name} dans ton dashboard !</h1>
         </div>
     );
 }

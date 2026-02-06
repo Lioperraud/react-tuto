@@ -14,19 +14,32 @@
   top:0;
   left:0 ;
   right:0;
-  height:40px;
+  height:60px;
   padding:16px 0;
   background-color: #fff;
   display:flex;
   justify-content: center;
+  align-items: center;
   gap:16px;
 }
 .menu a{
   color:#999;
   font-size:1.2em;
+  line-height: 1;
 }
 .menu a.active{
   color:#000;
+}
+.menu .logout{
+  position:fixed;
+  top:4px;
+  right:4px;
+  color:#000;
+  font-size: 0.8em;
+}
+.menu .logout .lien{
+  text-decoration: underline;
+  cursor: pointer;
 }
 .card{
   border:1px solid #fff;
