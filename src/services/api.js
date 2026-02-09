@@ -1,28 +1,36 @@
 export const getUsers = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  if (!res.ok) throw new Error("Erreur API");
-  return res.json();
-};
-
-export const getUserById = async (id) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-  if (!res.ok) throw new Error("Erreur API");
-  return res.json();
-};
-
-export const getLog = async (username, password) => {
-  const res = await fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    });
-  if (!res.ok) throw new Error("Identifiants invalides");
-  return await res.json();
+  const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  if (!res.ok) throw new Error('Erreur API')
+  return res.json()
 }
 
+export const getUserById = async (id) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+  if (!res.ok) throw new Error('Erreur API')
+  return res.json()
+}
+
+export const getLog = async (username, password) => {
+  const res = await fetch('https://dummyjson.com/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
+  })
+  if (!res.ok) throw new Error('Identifiants invalides')
+  return await res.json()
+}
+
+export const getUserMe = async (token) => {
+  const res = await fetch('https://dummyjson.com/auth/me', {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error('Erreur token')
+  return await res.json()
+}
 
 /*
 {
